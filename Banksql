@@ -1,0 +1,145 @@
+mysql> create database bank;
+Query OK, 1 row affected (0.05 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| BANK               |
+| DBMS               |
+| DEPT               |
+| bank               |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+8 rows in set (0.01 sec)
+
+mysql> use bank;
+Database changed
+mysql> create table customer(cid varchar(5) primary key,cname varchar(30),city varchar(30));
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> desc customer;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| cid   | varchar(5)  | NO   | PRI | NULL    |       |
+| cname | varchar(30) | YES  |     | NULL    |       |
+| city  | varchar(30) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+mysql> create table branch(bid varchar(10),bname varchar(20),bcity varchar(20),constraint branch_bid_pk primary key(bid));
+Query OK, 0 rows affected (0.20 sec)
+
+mysql> create table account(acc_no varchar(20)primary key,cid varchar(15),bid varchar(10),amount varchar(16),adate DATE,foreign key(cid) references customer(cid),foreign key(bid) references branch(bid));
+Query OK, 0 rows affected (0.23 sec)
+
+mysql> create table borrower(loan_no varchar(20)primary key,cid varchar(10),bid varchar(20),amount int(20),foreign key(cid) references customer(cid),foreign key(bid) references branch(bid));
+Query OK, 0 rows affected, 1 warning (0.27 sec)
+
+
+mysql> desc account;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| acc_no | varchar(20) | NO   | PRI | NULL    |       |
+| cid    | varchar(15) | YES  | MUL | NULL    |       |
+| bid    | varchar(10) | YES  | MUL | NULL    |       |
+| amount | varchar(16) | YES  |     | NULL    |       |
+| adate  | date        | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> desc branch;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| bid   | varchar(10) | NO   | PRI | NULL    |       |
+| bname | varchar(15) | YES  |     | NULL    |       |
+| bcity | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc borrower;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| loan_no | varchar(20) | NO   | PRI | NULL    |       |
+| cid     | varchar(10) | YES  | MUL | NULL    |       |
+| bid     | varchar(20) | YES  | MUL | NULL    |       |
+| amount  | int         | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+
+mysql> desc customer;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| cid   | varchar(10) | NO   | PRI | NULL    |       |
+| cname | varchar(15) | YES  |     | NULL    |       |
+| city  | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select *from customer;
++-----+-------+---------+
+| cid | cname | city    |
++-----+-------+---------+
+| 101 | priya | kochi   |
+| 102 | sobha | Tvm     |
+| 103 | madhu | Alpy    |
+| 104 | ramu  | calicut |
++-----+-------+---------+
+4 rows in set (0.00 sec)
+
+mysql> select *from customer where city='kochi';
++-----+-------+-------+
+| cid | cname | city  |
++-----+-------+-------+
+| 101 | priya | kochi |
++-----+-------+-------+
+1 row in set (0.00 sec)
+
+mysql> insert into branch values(105,'palai','mg road');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into branch values(106,'edapally','kochi');
+Query OK, 1 row affected (0.04 sec)
+
+
+mysql> insert into branch values(107,'palayam','tvm');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into branch values(108,'cherthala','alappuzha');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into branch values(109,'adoor','pathanamthitta');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into branch values(110,'ashramam','kollam');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select *from branch;
++-----+-----------+----------------+
+| bid | bcity     | bname          |
++-----+-----------+----------------+
+| 105 | palai     | mg road        |
+| 106 | edapally  | kochi          |
+| 107 | palayam   | tvm            |
+| 108 | cherthala | alappuzha      |
+| 109 | adoor     | pathanamthitta |
+| 110 | ashramam  | kollam         |
++-----+-----------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> 
+
+
+Footer
+© 2023 GitHub, Inc.
+Footer navigation
+
+
