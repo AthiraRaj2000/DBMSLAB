@@ -1,0 +1,265 @@
+
+Database changed
+mysql> DESC BRANCH;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| BID    | int(11)     | NO   | PRI | NULL    |       |
+| BNAME  | varchar(20) | NO   |     | NULL    |       |
+| B_CITY | varchar(20) | NO   |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> INSERT INTO BRANCH VALUES(101,'SBI','KUZHUR');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> SELECT *FROM BRANCH WHERE B_CITY='KUZHUR';
++-----+-------+--------+
+| BID | BNAME | B_CITY |
++-----+-------+--------+
+| 101 | SBI   | KUZHUR |
++-----+-------+--------+
+1 row in set (0.00 sec)
+
+mysql> INSERT INTO BRANCH VALUES(102,'fedral','MG ROAD');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> SELECT *FROM BRANCH WHERE B_CITY='MG ROAD';
++-----+--------+---------+
+| BID | BNAME  | B_CITY  |
++-----+--------+---------+
+| 102 | fedral | MG ROAD |
++-----+--------+---------+
+1 row in set (0.00 sec)
+
+mysql> DESC CUSTOMER;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| CID   | int(11)     | NO   | PRI | NULL    |       |
+| CNAME | varchar(20) | NO   |     | NULL    |       |
+| CITY  | varchar(20) | NO   |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> INSERT INTO CUSTOMER VALUES(1,'ANU','THRISSUR');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> INSERT INTO CUSTOMER VALUES(2,'MANU','KOCHI');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO CUSTOMER VALUES(3,'ARUN','CALICUT');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> SELECT *FROM CUSTOMER;
++-----+-------+----------+
+| CID | CNAME | CITY     |
++-----+-------+----------+
+|   1 | ANU   | THRISSUR |
+|   2 | MANU  | KOCHI    |
+|   3 | ARUN  | CALICUT  |
+| 101 | SASI  | KOLLAM   |
+| 102 | SUKU  | THRISSUR |
+| 103 | RAMAN | ALAPUZHA |
++-----+-------+----------+
+6 rows in set (0.00 sec)
+
+mysql> DELETE FROM CUSTOMER WHERE CID=101;
+Query OK, 1 row affected (0.06 sec)
+
+mysql> DELETE FROM CUSTOMER WHERE CID=102;
+Query OK, 1 row affected (0.03 sec)
+
+mysql> DELETE FROM CUSTOMER WHERE CID=103;
+Query OK, 1 row affected (0.04 sec)
+
+mysql> SELECT *FROM CUSTOMER;
++-----+-------+----------+
+| CID | CNAME | CITY     |
++-----+-------+----------+
+|   1 | ANU   | THRISSUR |
+|   2 | MANU  | KOCHI    |
+|   3 | ARUN  | CALICUT  |
++-----+-------+----------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT *FROM CUSTOMER WHERE CITY='KOCHI';
++-----+-------+-------+
+| CID | CNAME | CITY  |
++-----+-------+-------+
+|   2 | MANU  | KOCHI |
++-----+-------+-------+
+1 row in set (0.00 sec)
+
+mysql> SELECT *FROM CUSTOMER WHERE CITY='CALICUT';
++-----+-------+---------+
+| CID | CNAME | CITY    |
++-----+-------+---------+
+|   3 | ARUN  | CALICUT |
++-----+-------+---------+
+1 row in set (0.00 sec)
+
+mysql> SELECT *FROM ACCOUNT;
+Empty set (0.00 sec)
+
+mysql> DESC ACCOUNT;
++--------+---------+------+-----+---------+-------+
+| Field  | Type    | Null | Key | Default | Extra |
++--------+---------+------+-----+---------+-------+
+| ACCNO  | int(11) | NO   | PRI | NULL    |       |
+| CID    | int(11) | NO   |     | NULL    |       |
+| BID    | int(11) | NO   |     | NULL    |       |
+| AMOUNT | int(11) | NO   |     | NULL    |       |
+| date   | date    | YES  |     | NULL    |       |
++--------+---------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> INSERT INTO ACCOUNT VALUES(1001,1,101,500000,12 03 2000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '03 2000)' at line 1
+mysql> INSERT INTO ACCOUNT VALUES(1001,1,101,500000,30122000);
+ERROR 1292 (22007): Incorrect date value: '30122000' for column 'date' at row 1
+mysql> INSERT INTO ACCOUNT VALUES(1001,1,101,500000);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> INSERT INTO ACCOUNT VALUES(1001,1,101,500000,2000/12/23);
+ERROR 1292 (22007): Incorrect date value: '7.246376811565217391' for column 'date' at row 1
+mysql> INSERT INTO ACCOUNT VALUES(1001,1,101,500000,'2000/12/23');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> INSERT INTO ACCOUNT VALUES(1002,2,102,500000,'2000/12/25');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> DESC ACCOUNT;
++--------+---------+------+-----+---------+-------+
+| Field  | Type    | Null | Key | Default | Extra |
++--------+---------+------+-----+---------+-------+
+| ACCNO  | int(11) | NO   | PRI | NULL    |       |
+| CID    | int(11) | NO   |     | NULL    |       |
+| BID    | int(11) | NO   |     | NULL    |       |
+| AMOUNT | int(11) | NO   |     | NULL    |       |
+| date   | date    | YES  |     | NULL    |       |
++--------+---------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT *FROM ACCOUNT;
++-------+-----+-----+--------+------------+
+| ACCNO | CID | BID | AMOUNT | date       |
++-------+-----+-----+--------+------------+
+|  1001 |   1 | 101 | 500000 | 2000-12-23 |
+|  1002 |   2 | 102 | 500000 | 2000-12-25 |
++-------+-----+-----+--------+------------+
+2 rows in set (0.00 sec)
+
+mysql> mysql> SELECT C.CNAME FROM CUSTOMER C,ACCOUNT A,BRANCH B WHERE C.CID=A.CID AND B.BID=A.B.B_CITY='MG ROAD';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '='MG ROAD'' at line 1
+mysql> SELECT C.CNAME FROM CUSTOMER C,ACCOUNT A,BRANCH B WHERE C.CID=A.CID AND B.BID=A.BID AND B.B_CITY='MG ROAD';
++-------+
+| CNAME |
++-------+
+| MANU  |
++-------+
+1 row in set (0.00 sec)
+
+mysql> SELECT *FROM BORROWER;
+Empty set (0.00 sec)
+
+mysql> DESC BORROWER;
++--------+---------+------+-----+---------+-------+
+| Field  | Type    | Null | Key | Default | Extra |
++--------+---------+------+-----+---------+-------+
+| LOANNO | int(11) | NO   | PRI | NULL    |       |
+| CID    | int(11) | NO   |     | NULL    |       |
+| BID    | int(11) | NO   |     | NULL    |       |
+| AMOUNT | int(11) | NO   |     | NULL    |       |
++--------+---------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> INSERT INTO BORROWER VALUES(1231,1,101,500000);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> INSERT INTO BORROWER VALUES(1232,2,102,650000);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> SELECT C.CNAME FROM CUSTOMER C,BORROWER B WHERE C.CID=B.CID AND C.CITY='CALICUT';
+Empty set (0.00 sec)
+
+mysql> INSERT INTO BORROWER VALUES(1233,3,103,650000);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> SELECT C.CNAME FROM CUSTOMER C,BORROWER B WHERE C.CID=B.CID AND C.CITY='CALICUT';
++-------+
+| CNAME |
++-------+
+| ARUN  |
++-------+
+1 row in set (0.00 sec)
+
+mysql> SELECT CNAME FROM CUSTOMER  WHERE CID IN(SELECT CID FROM ACCOUNT WHERE BID IN(SELECT BID FROM ACCOUNT GROUP BY BID HAVING AVG(AMOUNT)>32000));
++-------+
+| CNAME |
++-------+
+| ANU   |
+| MANU  |
++-------+
+2 rows in set (0.02 sec)
+
+mysql> SELECT C.CNAME FROM CUSTOMER C,ACCOUNT A,BRANCH B WHERE A.CID=C.CID AND A.BID=B.BID AND A.AMOUNT=(SELECT MAX(A1.AMOUNT)FROM ACCOUNT A1); 
++-------+
+| CNAME |
++-------+
+| ANU   |
+| MANU  |
++-------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT CNAME FROM CUSTOMER  WHERE CID IN(SELECT CID FROM ACCOUNT WHERE CID NOT IN(SELECT CID FROM BORROWER));
+Empty set (0.00 sec)
+
+mysql> SELECT BNAME FROM BRANCH WHERE BID IN(SELECT BID FROM ACCOUNT GROUP BY CID HAVING COUNT(BID)>=ALL(SELECT COUNT(CID)FROM ACCOUNT GROUP BY BID));
+ERROR 1055 (42000): Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'BANK.ACCOUNT.BID' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+mysql> SELECT BNAME FROM BRANCH WHERE BID IN(SELECT BID FROM ACCOUNT GROUP BY BID HAVING COUNT(BID)>=ALL(SELECT COUNT(CID)FROM ACCOUNT GROUP BY BID));
++--------+
+| BNAME  |
++--------+
+| SBI    |
+| fedral |
++--------+
+2 rows in set (0.00 sec)
+
+   
+mysql> SELECT CNAME FROM CUSTOMER  WHERE CID IN(SELECT CID FROM ACCOUNT GROUP BY CID HAVING COUNT(CID)>=ALL(SELECT COUNT(CID)FROM ACCOUNT GROUP BY CID));
++-------+
+| CNAME |
++-------+
+| ANU   |
+| MANU  |
++-------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT B_CITY FROM BRANCH GROUP BY B_CITY HAVING COUNT(BID)>=ALL(SELECT COUNT(BID)FROM BRANCH GROUP BY B_CITY);
++---------+
+| B_CITY  |
++---------+
+| KUZHUR  |
+| MG ROAD |
++---------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT CNAME FROM CUSTOMER  WHERE CITY='KOCHI' AND CID IN(SELECT CID FROM ACCOUNT WHERE CID IN(SELECT CID FROM BORROWER));
++-------+
+| CNAME |
++-------+
+| MANU  |
++-------+
+1 row in set (0.00 sec)
+
+mysql> SELECT SUM(AMOUNT)AS LOAN_AMOUNT FROM BORROWER;
++-------------+
+| LOAN_AMOUNT |
++-------------+
+|     1800000 |
++-------------+
+1 row in set (0.00 sec)
+
+
+
+
