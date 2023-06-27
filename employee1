@@ -1,0 +1,219 @@
+ 
+mysql> insert into regions values(1,'Europe');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into regions values(2,'America');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into regions values(3,'Asia');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into regions values(4,'London');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into countries values('AR','Argentina',2);
+ERROR 1366 (HY000): Incorrect integer value: 'AR' for column 'countrie_id' at row 1
+mysql> insert into countries values(111,'Argentina',2);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into countries values(112,'Brazil',3);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into countries values(113,'Australia',4);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into countries values(114,'Canada',1);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into locations values(1400,'jabberwocky road',26192,'southlake','texas','111');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into locations values(1500,'abberhocky road',36192,'northlake','california','112');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into locations values(1600,'Arthur st',36192,'london','uk','113');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into locations values(1700,'oxford city',36192,'oxford','usa','114');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into jobs values(1,'Accountant',15000,25000);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into jobs values(2,'general manager',25000,35000);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into jobs values(3,'assist manager',20000,30000);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into jobs values(4,'finance manager',220000,32000);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into departments values(1,'Administration',1400);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into departments values(2,'Management',1500);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into departments values(3,'Executive',1600);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into departments values(4,'Finance',1700);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into manager values(11,'Ramu');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into manager values(12,'Sheeba');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into manager values(13,'Manu');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into manager values(14,'Raju');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into employee values(121,'Alexander','george','alex@gmail.com',9495181730,'1995-05-20',1,25000,11,2);
+ERROR 1264 (22003): Out of range value for column 'phone_number' at row 1
+mysql> insert into employee values(121,'Alexander','george','alex@gmail.com',949518173,'1995-05-20',1,25000,11,2);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into employee values(122,'Aswathy','renu','achu@gmail.com',929518173,'1995-06-22',2,26000,12,3);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into employee values(123,'Revathy','remesh','revu@gmail.com',829518173,'1996-07-28',3,24000,13,4);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into employee values(124,'Lakshman','lash','lash@gmail.com',929518173,'1997-08-30',4,23000,14,1);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select *from jobs;
++--------+-----------------+------------+------------+
+| job_id | job_title       | min_salary | max_salary |
++--------+-----------------+------------+------------+
+|      1 | Accountant      |      15000 |      25000 |
+|      2 | general manager |      25000 |      35000 |
+|      3 | assist manager  |      20000 |      30000 |
+|      4 | finance manager |     220000 |      32000 |
++--------+-----------------+------------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select *from regions;
++-----------+-------------+
+| region_id | region_name |
++-----------+-------------+
+|         1 | Europe      |
+|         2 | America     |
+|         3 | Asia        |
+|         4 | London      |
++-----------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> select *from departments;
++---------------+-----------------+-------------+
+| department_id | department_name | location_id |
++---------------+-----------------+-------------+
+|             1 | Administration  |        1400 |
+|             2 | Management      |        1500 |
+|             3 | Executive       |        1600 |
+|             4 | Finance         |        1700 |
++---------------+-----------------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> select *from countries;
++-------------+---------------+-----------+
+| countrie_id | countrie_name | region_id |
++-------------+---------------+-----------+
+|         111 | Argentina     |         2 |
+|         112 | Brazil        |         3 |
+|         113 | Australia     |         4 |
+|         114 | Canada        |         1 |
++-------------+---------------+-----------+
+4 rows in set (0.00 sec)
+
+mysql> select *from locations;
++-------------+------------------+-------------+-----------+----------------+-------------+
+| location_id | street_address   | postal_code | city      | state_province | countrie_id |
++-------------+------------------+-------------+-----------+----------------+-------------+
+|        1400 | jabberwocky road | 26192       | southlake | texas          |         111 |
+|        1500 | abberhocky road  | 36192       | northlake | california     |         112 |
+|        1600 | Arthur st        | 36192       | london    | uk             |         113 |
+|        1700 | oxford city      | 36192       | oxford    | usa            |         114 |
++-------------+------------------+-------------+-----------+----------------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> select *from employee;
++-------------+------------+-----------+----------------+--------------+------------+--------+--------+------------+---------------+
+| employee_id | first_name | last_name | email          | phone_number | hire_date  | job_id | salary | manager_id | department_id |
++-------------+------------+-----------+----------------+--------------+------------+--------+--------+------------+---------------+
+|         121 | Alexander  | george    | alex@gmail.com |    949518173 | 1995-05-20 |      1 |  25000 |         11 |             2 |
+|         122 | Aswathy    | renu      | achu@gmail.com |    929518173 | 1995-06-22 |      2 |  26000 |         12 |             3 |
+|         123 | Revathy    | remesh    | revu@gmail.com |    829518173 | 1996-07-28 |      3 |  24000 |         13 |             4 |
+|         124 | Lakshman   | lash      | lash@gmail.com |    929518173 | 1997-08-30 |      4 |  23000 |         14 |             1 |
++-------------+------------+-----------+----------------+--------------+------------+--------+--------+------------+---------------+
+4 rows in set (0.00 sec)
+
+mysql> select *from manager;
++------------+--------------+
+| manager_id | manager_name |
++------------+--------------+
+|         11 | Ramu         |
+|         12 | Sheeba       |
+|         13 | Manu         |
+|         14 | Raju         |
++------------+--------------+
+4 rows in set (0.00 sec)
+
+mysql> insert into employee values(1000,'Akshaya','suresh','Father',121);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into dependents values(1000,'Akshaya','suresh','Father',121);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into dependents values(1001,'Anoop','mahesh','Mother',122);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into dependents values(1002,'Reshmi','raj','Sister',123);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into dependents values(1003,'Ajay','shaji','Brother',124);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select*from dependents;
++--------------+------------+-----------+--------------+-------------+
+| dependent_id | first_name | last_name | relationship | employee_id |
++--------------+------------+-----------+--------------+-------------+
+|         1000 | Akshaya    | suresh    | Father       |         121 |
+|         1001 | Anoop      | mahesh    | Mother       |         122 |
+|         1002 | Reshmi     | raj       | Sister       |         123 |
+|         1003 | Ajay       | shaji     | Brother      |         124 |
++--------------+------------+-----------+--------------+-------------+
+4 rows in set (0.00 sec)
+
+mysql>  1.select employee.* from employee join department d on employee.department_id=d.department_id join locations l on d.location_id=l.location
+_id where l.location_id=1700;
++-------------+------------+-----------+------------------+----------+------------+--------+------------+--------+---------------+
+| employee_id | first_name | last_name | email            | phone_no | hire_date  | salary | manager_id | job_id | department_id |
++-------------+------------+-----------+------------------+----------+------------+--------+------------+--------+---------------+
+|           4 | alfiya     | k         | alfiya@gmail.com | 12345678 | 2000-04-09 | 33000  |         28 |     12 |            14 |
++-------------+------------+-----------+------------------+----------+------------+--------+------------+--------+---------------+
+1 row in set (0.01 sec)mysql> insert into employee values(5,'ameena','s','ameenas@gmail.com',1234567,'2003-04-11',55000,48,12,15);
+Query OK, 1 row affected (0.07 sec)
+
+2.mysql> select * from employee where salary=(select MAX(salary)from employee);
++-------------+------------+-----------+-------------------+----------+------------+--------+------------+--------+---------------+
+| employee_id | first_name | last_name | email             | phone_no | hire_date  | salary | manager_id | job_id | department_id |
++-------------+------------+-----------+-------------------+----------+------------+--------+------------+--------+---------------+
+|           5 | ameena     | s         | ameenas@gmail.com | 1234567  | 2003-04-11 | 55000  |         48 |     12 |            15 |
++-------------+------------+-----------+-------------------+----------+------------+--------+------------+--------+---------------+
+1 row in set (0.01 sec)
+3.select e.employee_id,e.first_name from employee e join department d on e.department_id=d.department_id where d.location_id <> 1700;
++-------------+------------+
+| employee_id | first_name |
++-------------+------------+
+|           1 | alen       |
+|           5 | ameena     |
++-------------+------------+
+2 rows in set (0.01 sec)
+
+
+ 
